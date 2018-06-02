@@ -9,16 +9,17 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenCvSharp;
 using OpenCvSharp.Extensions;
+using OpenCvSharp.UserInterface;
 
 namespace OpencvSharpUtility
 {
-    public partial class PanAndZoomPictureBox : PictureBox
+    public partial class PanAndZoomPictureBox : PictureBoxIpl
     {
         public Mat Img
         {
             set
             {
-                this.Image = value.ToBitmap();
+                this.ImageIpl = value;
             }
         }
 

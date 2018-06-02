@@ -64,22 +64,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PanAndZoomPictureBox.cs">
+    <Compile Include="Algorithm\FindSemiCircle.cs" />
+    <Compile Include="UI\PanAndZoomPictureBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="PanAndZoomPictureBox.Designer.cs">
+    <Compile Include="UI\PanAndZoomPictureBox.Designer.cs">
       <DependentUpon>PanAndZoomPictureBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserControlPicBox.cs">
+    <Compile Include="UI\UserControlPicBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControlPicBox.Designer.cs">
+    <Compile Include="UI\UserControlPicBox.Designer.cs">
       <DependentUpon>UserControlPicBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Window.cs" />
-    <EmbeddedResource Include="PanAndZoomPictureBox.resx">
+    <Compile Include="UI\Window.cs" />
+    <EmbeddedResource Include="UI\PanAndZoomPictureBox.resx">
       <DependentUpon>PanAndZoomPictureBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -91,7 +92,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="UserControlPicBox.resx">
+    <EmbeddedResource Include="UI\UserControlPicBox.resx">
       <DependentUpon>UserControlPicBox.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
@@ -106,7 +107,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="UI\App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

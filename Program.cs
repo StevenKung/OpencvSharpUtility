@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenCvSharp;
+using OpencvSharpUtility.Algorithm;
 
 namespace OpencvSharpUtility
 {
@@ -27,9 +28,18 @@ namespace OpencvSharpUtility
             };
             f.Controls.Add(picbox);
             f.ShowDialog();
+            f.Controls.Clear();
             Window.Histogram(src, "ttt");
 
-        
+
+            Mat circle = Cv2.ImRead(@"circle.png", ImreadModes.GrayScale);
+            FindSemiCircle semiCircle = new FindSemiCircle(circle);
+            semiCircle.Find();
+            UserControlPicBox picbox2 = new UserControlPicBox(semiCircle.OutputImg);
+            picbox.Dock = DockStyle.Fill;
+           
+            f.Controls.Add(picbox2);
+            f.ShowDialog();
         }
     }
 }
