@@ -32,7 +32,7 @@ namespace OpencvSharpUtility
         {
             for (int i = 0; i < channels.Length; ++i)
             {
-                statusStrip1.Items[i].Text = channels[i].Get<Byte>(e.X, e.Y).ToString();
+                statusStrip1.Items[i].Text = channels[i].Get<Byte>(e.Y, e.X).ToString();
             }
 
         }
