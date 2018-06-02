@@ -7,25 +7,27 @@ namespace OpencvSharpUtility
     {
         public static void Histogram(Mat img, string name)
         {
-            FormHist form = new FormHist();
+            TableLayoutPanel layoutPanel = new TableLayoutPanel
+            {
+                GrowStyle = TableLayoutPanelGrowStyle.AddColumns,
+                Dock = DockStyle.Fill,
+                AutoSizeMode = AutoSizeMode.GrowOnly,
+                ColumnCount = 1,
+                RowCount = 1,
+            };
 
             //Note: OpenCV uses BGR color order
             Mat[] channels = img.Split();
 
-           for (int i=0; i<channels.Length;i++)
+            for (int i = 0; i < channels.Length; i++)
             {
-                Chart chart = new Chart
-                {
-                    Dock = DockStyle.Fill,
-                    Height = 300,
-                };
+                Chart chart = new Chart();
+                chart.Dock = DockStyle.Fill;
                 chart.Titles.Add("channel" + i.ToString());
-                chart.Series.Add("series1");
+                chart.Series.Add("series");
                 chart.Series[0].ChartType = SeriesChartType.Column;
                 chart.ChartAreas.Add(new ChartArea());
                 DataPointCollection points = chart.Series[0].Points;
-
-
 
                 // Calculate histogram
                 Mat hist = new Mat();
@@ -40,19 +42,25 @@ namespace OpencvSharpUtility
                     hdims,
                     ranges);
 
-
+                //draw data in chart
                 for (int j = 0; j < hdims[0]; ++j)
                 {
                     points.AddXY(j, hist.Get<float>(j));
                 }
 
-                form.tableLayoutPanel1.Controls.Add(chart, -1,-1);
+                layoutPanel.ColumnCount = i;
+                layoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+                layoutPanel.Controls.Add(chart, -1, -1);
             }
+
+            Form form = new Form
+            {
+                Text = name,
+                Size = new System.Drawing.Size(300 * channels.Length, 400),
+                AutoSizeMode = AutoSizeMode.GrowOnly,
+            };
+            form.Controls.Add(layoutPanel);
             form.ShowDialog();
         }
-
-
-
-
     }
 }

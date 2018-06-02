@@ -64,17 +64,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FormHist.cs">
-      <SubType>Form</SubType>
+    <Compile Include="PanAndZoomPictureBox.cs">
+      <SubType>Component</SubType>
     </Compile>
-    <Compile Include="FormHist.Designer.cs">
-      <DependentUpon>FormHist.cs</DependentUpon>
+    <Compile Include="PanAndZoomPictureBox.Designer.cs">
+      <DependentUpon>PanAndZoomPictureBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControlPicBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlPicBox.Designer.cs">
+      <DependentUpon>UserControlPicBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Window.cs" />
-    <EmbeddedResource Include="FormHist.resx">
-      <DependentUpon>FormHist.cs</DependentUpon>
+    <EmbeddedResource Include="PanAndZoomPictureBox.resx">
+      <DependentUpon>PanAndZoomPictureBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -85,6 +91,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UserControlPicBox.resx">
+      <DependentUpon>UserControlPicBox.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
