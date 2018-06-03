@@ -9,29 +9,43 @@ namespace OpencvSharpUtility.Algorithm
 {
     class FindSemiCircle
     {
-        private Mat src;
-        private Mat outputimg = new Mat();
+        private Mat gray = new Mat();
 
+        private Mat outputimg = new Mat();
         public Mat OutputImg { get { return outputimg; } }
 
-       /// <summary>
-       /// Src image must use gray scale
-       /// </summary>
-       /// <param name="Src"></param>
+        /// <summary>
+        /// Src could use 1 or 3 channels image
+        /// </summary>
+        /// <param name="Src"></param>
         public FindSemiCircle(Mat Src)
         {
-            src = Src;
-            Cv2.CvtColor(Src, outputimg, ColorConversionCodes.GRAY2BGR);
+            switch (Src.Channels())
+            {
+                case 1:
+                    gray = Src.Clone();
+                    Cv2.CvtColor(Src, outputimg, ColorConversionCodes.GRAY2BGR);
+                    break;
+
+                case 3:
+                    outputimg = Src;
+                    Cv2.CvtColor(Src, gray, ColorConversionCodes.BGR2GRAY);
+                    break;
+
+                default:
+                    throw new Exception("Source image must 1 or 3 channels");
+                    break;
+            }
         }
 
         public void Find()
         {
             Mat canny = new Mat();
-            Cv2.Canny(src, canny, 200, 20);
+            Cv2.Canny(gray, canny, 200, 20);
             Cv2.ImShow("canny", canny.GreaterThan(0.0)); //mat > 0
             CircleSegment[] circles;
             //for more info https://docs.opencv.org/2.4/modules/imgproc/doc/feature_detection.html?highlight=houghcircles
-            circles = Cv2.HoughCircles(src, HoughMethods.Gradient, 1, 45, 200, 35, 0, 0);
+            circles = Cv2.HoughCircles(gray, HoughMethods.Gradient, 1, 45, 200, 35, 0, 0);
 
             // draw the circle detected
             foreach (CircleSegment element in circles)
@@ -45,7 +59,7 @@ namespace OpencvSharpUtility.Algorithm
             Mat dt = new Mat();
             Mat wh = new Mat(canny.Rows, canny.Cols, MatType.CV_8UC1, new Scalar(255));
             Cv2.DistanceTransform(wh - canny.GreaterThan(0.0), dt, DistanceTypes.L2, DistanceMaskSize.Mask3);
-            
+
             //test for semi-circle
             float minInlierDist = 2.0f;
             foreach (CircleSegment element in circles)
@@ -70,7 +84,7 @@ namespace OpencvSharpUtility.Algorithm
                     if (dt.Get<float>(cy, cx) < maxInlierDist) //carefor the image coordinate
                     {
                         inlier++;
-                        Cv2.Circle(outputimg, cx, cy, 3, new Scalar(255,255,255));
+                        Cv2.Circle(outputimg, cx, cy, 3, new Scalar(255, 255, 255));
                     }
                     else
                     {

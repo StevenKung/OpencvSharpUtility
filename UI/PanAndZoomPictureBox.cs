@@ -21,6 +21,10 @@ namespace OpencvSharpUtility
             {
                 this.ImageIpl = value;
             }
+            get
+            {
+                return this.ImageIpl;
+            }
         }
 
         public PanAndZoomPictureBox()
