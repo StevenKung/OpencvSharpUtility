@@ -64,8 +64,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Algorithm\FindLines.cs" />
-    <Compile Include="Algorithm\FindSemiCircle.cs" />
+    <Compile Include="Algorithm\BaseFinder.cs" />
+    <Compile Include="Algorithm\LineFinder.cs" />
+    <Compile Include="Algorithm\SemiCircleFinder.cs" />
+    <Compile Include="UI\MatTypeEditor.cs" />
     <Compile Include="UI\PanAndZoomPictureBox.cs">
       <SubType>Component</SubType>
     </Compile>

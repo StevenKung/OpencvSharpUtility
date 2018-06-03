@@ -7,42 +7,17 @@ using OpenCvSharp;
 
 namespace OpencvSharpUtility.Algorithm
 {
-    class FindSemiCircle
+    class SemiCircleFinder :BaseFinder
     {
-        private Mat gray = new Mat();
 
-        private Mat outputimg = new Mat();
-        public Mat OutputImg { get { return outputimg; } }
+        public SemiCircleFinder(Mat Src) : base(Src) { }
 
-        /// <summary>
-        /// Src could use 1 or 3 channels image
-        /// </summary>
-        /// <param name="Src"></param>
-        public FindSemiCircle(Mat Src)
-        {
-            switch (Src.Channels())
-            {
-                case 1:
-                    gray = Src.Clone();
-                    Cv2.CvtColor(Src, outputimg, ColorConversionCodes.GRAY2BGR);
-                    break;
 
-                case 3:
-                    outputimg = Src.Clone();
-                    Cv2.CvtColor(Src, gray, ColorConversionCodes.BGR2GRAY);
-                    break;
-
-                default:
-                    throw new Exception("Source image must 1 or 3 channels");
-                    break;
-            }
-        }
-
-        public void Find()
+        public override object Find()
         {
             Mat canny = new Mat();
             Cv2.Canny(gray, canny, 200, 20);
-            Cv2.ImShow("canny", canny.GreaterThan(0.0)); //mat > 0
+           // Cv2.ImShow("canny", canny.GreaterThan(0.0)); //mat > 0
             CircleSegment[] circles;
             //for more info https://docs.opencv.org/2.4/modules/imgproc/doc/feature_detection.html?highlight=houghcircles
             circles = Cv2.HoughCircles(gray, HoughMethods.Gradient, 1, 45, 200, 35, 0, 0);
@@ -94,6 +69,7 @@ namespace OpencvSharpUtility.Algorithm
                 Console.WriteLine("{0}% of a circle with radius {1} detected",
                  100 * inlier / counter, element.Radius);
             }//foreach circle
+            return circles;
         }
 
 

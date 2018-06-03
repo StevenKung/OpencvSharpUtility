@@ -36,17 +36,31 @@ namespace OpencvSharpUtility
 
             Mat circle = Cv2.ImRead(@"circle.png", ImreadModes.AnyDepth | ImreadModes.AnyColor);
             //Mat circle = Cv2.ImRead(@"circle.png", ImreadModes.GrayScale);
-            FindSemiCircle semiCircle = new FindSemiCircle(circle);
+            SemiCircleFinder semiCircle = new SemiCircleFinder(circle);
             semiCircle.Find();
             picbox.SrcImg = semiCircle.OutputImg;
             f.ShowDialog();
 
 
             Mat magnifier = Cv2.ImRead(@"magnifier.png", ImreadModes.AnyColor | ImreadModes.AnyDepth);
-            FindLines findline = new FindLines(magnifier);
+            LineFinder findline = new LineFinder(magnifier);
             findline.Find();
             picbox.SrcImg = findline.OutputImg;
             f.ShowDialog();
+            f.Controls.Clear();
+
+
+            PropertyGrid grid = new PropertyGrid
+            {
+                Dock = DockStyle.Fill,
+            };
+
+            grid.SelectedObject = findline;
+            f.Controls.Add(grid);
+            f.ShowDialog();
+
+
+
         }
     }
 }
