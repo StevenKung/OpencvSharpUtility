@@ -35,6 +35,8 @@ namespace OpencvSharpUtility.UI
             };
             form.Controls.Add(control);
             form.ShowDialog();
+            control.Dispose();
+            form.Dispose();
             return value; // can also replace the wrapper object here
         }
 

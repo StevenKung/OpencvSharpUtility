@@ -13,11 +13,12 @@ namespace OpencvSharpUtility
 {
     public partial class UserControlPicBox : UserControl
     {
+        private Mat[] channels;
         public UserControlPicBox()
         {
             InitializeComponent();
         }
-
+        
         public Mat SrcImg
         {
             get
@@ -39,7 +40,7 @@ namespace OpencvSharpUtility
             }
         }
 
-        private Mat[] channels;
+     
         private void mouseMove(object sender, MouseEventArgs e)
         {
             for (int i = 0; i < channels.Length; ++i)

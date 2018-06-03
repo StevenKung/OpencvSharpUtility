@@ -4,18 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenCvSharp;
+using System.ComponentModel;
+using OpencvSharpUtility.UI;
+using System.Drawing.Design;
 
 namespace OpencvSharpUtility.Algorithm
 {
     class SemiCircleFinder :BaseFinder
     {
-
+        [Editor(typeof(MatTypeEditor), typeof(UITypeEditor))]
+        public Mat canny { get; set; } = new Mat();
         public SemiCircleFinder(Mat Src) : base(Src) { }
-
-
         public override object Find()
         {
-            Mat canny = new Mat();
             Cv2.Canny(gray, canny, 200, 20);
            // Cv2.ImShow("canny", canny.GreaterThan(0.0)); //mat > 0
             CircleSegment[] circles;
