@@ -25,7 +25,7 @@ namespace OpencvSharpUtility.Algorithm
                     break;
 
                 case 3:
-                    outputimg = Src;
+                    outputimg = Src.Clone();
                     Cv2.CvtColor(Src, gray, ColorConversionCodes.BGR2GRAY);
                     break;
 

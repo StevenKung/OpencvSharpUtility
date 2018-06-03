@@ -38,7 +38,7 @@ namespace OpencvSharpUtility
             //Mat circle = Cv2.ImRead(@"circle.png", ImreadModes.GrayScale);
             FindSemiCircle semiCircle = new FindSemiCircle(circle);
             semiCircle.Find();
-            picbox.SrcImg = circle;
+            picbox.SrcImg = semiCircle.OutputImg;
             f.ShowDialog();
 
 
