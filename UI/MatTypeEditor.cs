@@ -11,7 +11,7 @@ using OpenCvSharp;
 
 namespace OpencvSharpUtility.UI
 {
-    class MatTypeEditor :UITypeEditor
+    class MatTypeEditor : UITypeEditor
     {
 
         public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context)
@@ -20,9 +20,6 @@ namespace OpencvSharpUtility.UI
         }
         public override object EditValue(ITypeDescriptorContext context, System.IServiceProvider provider, object value)
         {
-            IWindowsFormsEditorService svc = provider.GetService(typeof(IWindowsFormsEditorService)) as IWindowsFormsEditorService;
-            
-
             UserControlPicBox control = new UserControlPicBox
             {
                 SrcImg = value as Mat
@@ -39,7 +36,26 @@ namespace OpencvSharpUtility.UI
             form.Dispose();
             return value; // can also replace the wrapper object here
         }
-
-
     }
+
+
+    class UpDownValueEditor : UITypeEditor
+    {
+        public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context)
+        {
+            return UITypeEditorEditStyle.DropDown;
+        }
+        public override object EditValue(ITypeDescriptorContext context, IServiceProvider provider, object value)
+        {
+            IWindowsFormsEditorService editorService = provider.GetService(typeof(IWindowsFormsEditorService)) as IWindowsFormsEditorService;
+            NumericUpDown udControl = new NumericUpDown();
+            udControl.Value = Convert.ToDecimal(value);
+            editorService.DropDownControl(udControl);
+            value = Convert.ChangeType(udControl.Value, value.GetType());
+            udControl.Dispose();
+            return value;
+        }
+    }
+
+
 }
