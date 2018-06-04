@@ -10,25 +10,30 @@ using OpencvSharpUtility.UI;
 
 namespace OpencvSharpUtility.Algorithm
 {
-    abstract class BaseFinder
+    public abstract class BaseFinder
     {
         protected Mat gray = new Mat();
         protected Mat outputimg = new Mat();
-        
-        public Mat OutputImg { get { return outputimg; } }
 
+        public Mat OutputImg { get { return outputimg; } }
+        private Mat sourceImg = null;
         public BaseFinder(Mat Src)
         {
-            switch (Src.Channels())
+            sourceImg = Src;
+        }
+
+        protected virtual void initialize()
+        {
+            switch (sourceImg.Channels())
             {
                 case 1:
-                    gray = Src.Clone();
-                    Cv2.CvtColor(Src, outputimg, ColorConversionCodes.GRAY2BGR);
+                    gray = sourceImg.Clone();
+                    Cv2.CvtColor(sourceImg, outputimg, ColorConversionCodes.GRAY2BGR);
                     break;
 
                 case 3:
-                    outputimg = Src.Clone();
-                    Cv2.CvtColor(Src, gray, ColorConversionCodes.BGR2GRAY);
+                    outputimg = sourceImg.Clone();
+                    Cv2.CvtColor(sourceImg, gray, ColorConversionCodes.BGR2GRAY);
                     break;
 
                 default:
@@ -36,6 +41,7 @@ namespace OpencvSharpUtility.Algorithm
                     break;
             }
         }
+
         public abstract object Find();
 
 

@@ -76,6 +76,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\UserControlBaseFinder.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UserControlBaseFinder.Designer.cs">
+      <DependentUpon>UserControlBaseFinder.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\UserControlPicBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -95,6 +101,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UI\UserControlBaseFinder.resx">
+      <DependentUpon>UserControlBaseFinder.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControlPicBox.resx">
       <DependentUpon>UserControlPicBox.cs</DependentUpon>
     </EmbeddedResource>

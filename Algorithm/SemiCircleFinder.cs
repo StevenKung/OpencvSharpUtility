@@ -17,6 +17,7 @@ namespace OpencvSharpUtility.Algorithm
         public SemiCircleFinder(Mat Src) : base(Src) { }
         public override object Find()
         {
+            initialize();
             Cv2.Canny(gray, canny, 200, 20);
            // Cv2.ImShow("canny", canny.GreaterThan(0.0)); //mat > 0
             CircleSegment[] circles;

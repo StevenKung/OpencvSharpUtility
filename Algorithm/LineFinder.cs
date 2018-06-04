@@ -39,6 +39,7 @@ namespace OpencvSharpUtility.Algorithm
 
         public override object Find()
         {
+            initialize();
             // Preprocess
             Cv2.Canny(gray, canny, cannyThreshold, cannyThreshold/2, 3, false);
             LineSegmentPoint[] segProb = Cv2.HoughLinesP(canny, rho,theta, threshod, minLineLength, maxLineGap);

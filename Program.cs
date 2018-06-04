@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenCvSharp;
 using OpencvSharpUtility.Algorithm;
+using OpencvSharpUtility.UI;
 
 namespace OpencvSharpUtility
 {
@@ -36,27 +37,27 @@ namespace OpencvSharpUtility
 
             Mat circle = Cv2.ImRead(@"circle.png", ImreadModes.AnyDepth | ImreadModes.AnyColor);
             //Mat circle = Cv2.ImRead(@"circle.png", ImreadModes.GrayScale);
-            SemiCircleFinder semiCircle = new SemiCircleFinder(circle);
+            BaseFinder semiCircle = new SemiCircleFinder(circle);
             semiCircle.Find();
             picbox.SrcImg = semiCircle.OutputImg;
             f.ShowDialog();
 
 
             Mat magnifier = Cv2.ImRead(@"magnifier.png", ImreadModes.AnyColor | ImreadModes.AnyDepth);
-            LineFinder findline = new LineFinder(magnifier);
+            BaseFinder findline = new LineFinder(magnifier);
             findline.Find();
             picbox.SrcImg = findline.OutputImg;
             f.ShowDialog();
             f.Controls.Clear();
 
 
-            PropertyGrid grid = new PropertyGrid
+            UserControlBaseFinder controlfinder = new UserControlBaseFinder
             {
                 Dock = DockStyle.Fill,
             };
 
-            grid.SelectedObject = findline;
-            f.Controls.Add(grid);
+            controlfinder.FinderReference = findline;
+            f.Controls.Add(controlfinder);
             f.ShowDialog();
 
 
