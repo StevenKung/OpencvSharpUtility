@@ -10,7 +10,7 @@ using System.Drawing.Design;
 
 namespace OpencvSharpUtility.Algorithm
 {
-    class SemiCircleFinder :BaseFinder
+    class SemiCircleFinder : BaseFinder
     {
 
 
@@ -52,8 +52,23 @@ namespace OpencvSharpUtility.Algorithm
         public override object Find()
         {
             initialize();
-            Cv2.Canny(gray, canny, cannyThreshold, cannyThreshold/2);
-           // Cv2.ImShow("canny", canny.GreaterThan(0.0)); //mat > 0
+            Cv2.Canny(gray, canny, cannyThreshold, cannyThreshold / 2);
+            // Cv2.ImShow("canny", canny.GreaterThan(0.0)); //mat > 0
+
+
+            Point[][] points = Cv2.FindContoursAsArray(gray, RetrievalModes.List, ContourApproximationModes.ApproxNone);
+            for (int i = 0; i < points.Length; i++)
+            {
+                Mat black = new Mat(gray.Rows, gray.Cols, gray.Type(), new Scalar(255));
+                Cv2.DrawContours(black, points, i, Scalar.Red,2);
+                Cv2.DrawContours(outputimg, points, i, Scalar.Red, 2);
+                Cv2.ImShow("contour", black);
+                Cv2.WaitKey(0);
+            }
+            Cv2.ImShow("contour", outputimg);
+            Cv2.WaitKey(0);
+
+         
             CircleSegment[] circles;
             //for more info https://docs.opencv.org/2.4/modules/imgproc/doc/feature_detection.html?highlight=houghcircles
             circles = Cv2.HoughCircles(gray, HoughMethods.Gradient, dp, minDist, cannyThreshold, param2, minRadius, maxRadius);
