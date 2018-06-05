@@ -35,7 +35,7 @@ namespace OpencvSharpUtility
             Window.Histogram(src, "ttt");
 
 
-            Mat circle = Cv2.ImRead(@"circle.png", ImreadModes.AnyDepth | ImreadModes.AnyColor);
+            Mat circle = Cv2.ImRead(@"magnifier.png", ImreadModes.AnyDepth | ImreadModes.AnyColor);
             //Mat circle = Cv2.ImRead(@"circle.png", ImreadModes.GrayScale);
             BaseFinder semiCircle = new SemiCircleFinder(circle);
             semiCircle.Find();
@@ -43,11 +43,11 @@ namespace OpencvSharpUtility
             f.ShowDialog();
 
 
-            Mat magnifier = Cv2.ImRead(@"magnifier.png", ImreadModes.AnyColor | ImreadModes.AnyDepth);
-            BaseFinder findline = new LineFinder(magnifier);
-            findline.Find();
-            picbox.SrcImg = findline.OutputImg;
-            f.ShowDialog();
+            //Mat magnifier = Cv2.ImRead(@"magnifier.png", ImreadModes.AnyColor | ImreadModes.AnyDepth);
+            //BaseFinder findline = new LineFinder(magnifier);
+            //findline.Find();
+            //picbox.SrcImg = findline.OutputImg;
+            //f.ShowDialog();
             f.Controls.Clear();
 
 
@@ -56,7 +56,7 @@ namespace OpencvSharpUtility
                 Dock = DockStyle.Fill,
             };
 
-            controlfinder.FinderReference = findline;
+            controlfinder.FinderReference = semiCircle;
             f.Controls.Add(controlfinder);
             f.ShowDialog();
 
