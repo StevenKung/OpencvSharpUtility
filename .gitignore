@@ -1,0 +1,4 @@
+/bin/Debug/*.config
+/bin/Debug/OpencvSharpUtility.exe.config
+OpencvSharpUtility.exe.config
+/obj

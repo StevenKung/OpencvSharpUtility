@@ -1,0 +1,7 @@
+/OpencvSharpUtility.exe.config
+OpencvSharpUtility.exe.config
+*dll
+*.pdb
+*.exe
+*.xml
+
