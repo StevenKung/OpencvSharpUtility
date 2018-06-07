@@ -25,7 +25,7 @@ namespace OpencvSharpUtility.UI
             set
             {
                 finderReference = value;
-                linkUI();
+                linkImage();
             }
             get { return finderReference; }
         }
@@ -33,10 +33,10 @@ namespace OpencvSharpUtility.UI
         void propertyChange(object sender, EventArgs e)
         {
             finderReference.Find();
-            linkUI();
+            linkImage();
         }
 
-        void linkUI()
+        void linkImage()
         {
             userControlPicBox1.SrcImg = finderReference.OutputImg;
             propertyGrid1.SelectedObject = finderReference;
